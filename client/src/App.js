@@ -9,6 +9,8 @@ import 'typeface-roboto-condensed'
 
 import { size, colour } from './style/theme'
 import Sidebar from './components/sidebar'
+import Body from './components/body'
+import TopBar from './components/topbar'
 
 const AppGrid = styled.main`
   display: grid;
@@ -21,7 +23,7 @@ const AppGrid = styled.main`
   font-size: ${size.fontbase};
 `
 
-const Body = styled.section`
+const BodyGrid = styled.section`
   display: grid;
   grid-template-rows: 120px 1fr;
 `
@@ -56,11 +58,14 @@ class App extends Component {
       <Router history={history}>
         <AppGrid>
           <Sidebar />
-          <Body>
-            <p className="App-intro">
-              {this.state.response}
-            </p>
-          </Body>
+          <BodyGrid>
+            <TopBar />
+            <Body>
+              <p className="App-intro">
+                {this.state.response}
+              </p>
+            </Body>
+          </BodyGrid>
         </AppGrid>
       </Router>
     );
