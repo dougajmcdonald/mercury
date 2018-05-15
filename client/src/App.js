@@ -60,10 +60,7 @@ class App extends Component {
           <Sidebar />
           <BodyGrid>
             <TopBar />
-            <Body>
-              <p className="App-intro">
-                {this.state.response}
-              </p>
+            <Body msg={this.state.response} >
             </Body>
           </BodyGrid>
         </AppGrid>
