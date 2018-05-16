@@ -64,8 +64,6 @@ class Tasks extends React.Component {
   constructor(props) {
     super(props)
 
-    console.log(props)
-
     this.state = {
       tasks: [
         {
@@ -87,8 +85,11 @@ class Tasks extends React.Component {
     }
   }
 
+  selectTask() {
+
+  }
+
   render() {
-    const { activeId } = this.props
     return <TaskGrid>
       <ExhibitGrid>
         <TableTitle>Outstanding tasks</TableTitle>
@@ -102,7 +103,10 @@ class Tasks extends React.Component {
           <tbody>
             {this.state.tasks.map(task =>
               <Route key={task.id} render={({ history }) => (
-                <tr onClick={() => history.push(`/task/${task.id}`)}>
+                <tr onClick={() => {
+                    this.props.getTask(task.id)
+                    history.push(`/task/${task.id}`)
+                  }}>
                   <td>{task.reference}</td>
                   <td>{task.task}</td>
                 </tr>

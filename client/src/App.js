@@ -36,9 +36,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err))
+    // this.callApi()
+    //   .then(res => this.setState({ response: res.express }))
+    //   .catch(err => console.log(err))
   }
 
   callApi = async () => {
@@ -52,6 +52,20 @@ class App extends Component {
     return body;
   }
 
+  getTask = async (id) => {
+    const response = await fetch(`/api/task/${id}`);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+
+    //return body;
+
+    this.setState({ task: body.task })
+  }
+
+
   render() {
     return (
       <Router history={history}>
@@ -59,8 +73,7 @@ class App extends Component {
           <Sidebar />
           <BodyGrid>
             <TopBar />
-            <Body msg={this.state.response} >
-            </Body>
+            <Body task={this.state.task} getTask={this.getTask}/>
           </BodyGrid>
         </AppGrid>
       </Router>

@@ -58,8 +58,11 @@ const Icon = styled.img`
   height: 30px;
 `
 
-const Body = (props) =>
-  <BodyGrid>
+const RouteWithProps = ({})
+
+const Body = (props) => {
+  const { task, getTask } = props
+  return <BodyGrid>
 
     <Route path="/task/:id" render={({ match: { params } }) => (
       <TabContainer>
@@ -82,12 +85,12 @@ const Body = (props) =>
     <Route exact path="/current-work" component={Work}/>
     <Route exact path="/assignment-history" component={Work}/>
     <Route exact path="/my-assets" component={Work}/>
+    <Route path="/task/:id" render={(props) => <TaskForm getTask={getTask} task={task} {...props}  />}/>
 
-    <Route path="/task/:id" component={TaskForm}/>
-
-    <Tasks />
+    <Tasks getTask={props.getTask} />
 
     {/* {msg} */}
   </BodyGrid>
+}
 
 export default Body
