@@ -8,13 +8,15 @@ import Paper from '../img/md-paper.svg'
 import Cube from '../img/md-cube.svg'
 
 import Work from '../components/work'
+import Tasks from '../components/tasks'
 
 const BodyGrid = styled.main`
   margin: ${size.grid};
 
   display: grid;
   grid-template-rows: 60px 1fr;
-  grid-template-columns: 1fr;
+  grid-template-columns: 3fr 1fr;
+  grid-column-gap: ${size.grid};
 `
 
 const TabContainer = styled.div`
@@ -59,10 +61,15 @@ const Body = ({ msg }) =>
       <NavItem to="/assignment-history"><Icon src={Paper} />Assignment History</NavItem>
       <NavItem to="/my-assets"><Icon src={Cube} />My Assets</NavItem>
     </TabContainer>
+    <TabContainer>
+      <NavItem to="/"><Icon src={Today} />Tasks</NavItem>
+    </TabContainer>
     <Route exact path="/" component={Work} />
     <Route exact path="/current-work" component={Work}/>
     <Route exact path="/assignment-history" component={Work}/>
     <Route exact path="/my-assets" component={Work}/>
+
+    <Tasks />
     {/* {msg} */}
   </BodyGrid>
 
