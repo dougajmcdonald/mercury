@@ -75,11 +75,11 @@ const Sidebar = () =>
       National Case Manager
     </Header>
     <Nav>
-      <NavItem to="/">
+      <NavItem to="/" exact>
         <Icon src={home} />
         Home
       </NavItem>
-      <NavItem to="/">
+      <NavItem to="/current-work">
         <Icon src={filing} />
         All Operations
       </NavItem>

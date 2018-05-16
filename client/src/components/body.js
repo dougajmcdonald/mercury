@@ -13,7 +13,7 @@ const BodyGrid = styled.main`
   margin: ${size.grid};
 
   display: grid;
-  grid-template-rows: 40px 1fr;
+  grid-template-rows: 60px 1fr;
   grid-template-columns: 1fr;
 `
 
@@ -28,22 +28,26 @@ const TabContainer = styled.div`
 
 const NavItem = styled(NavLink)`
   display: grid;
-  grid-template-columns: 60px 1fr;
+  grid-template-columns: 50px 1fr;
 
-  padding: ${size.tabpadding};
+  padding: ${size.formpadding};
+  padding-left: ${size.grid};
   margin-right: ${size.formpadding};
 
   text-decoration: none;
   color: ${colour.bluewhite};
-  line-height: 30px;
+  background-color: ${colour.backgrounddark};
+  line-height: 40px;
 
   :hover {
     color: ${colour.white};
-    background-color: ${colour.backgrounddark};
+    background-color: ${colour.backgroundlight};
   }
 `
 
 const Icon = styled.img`
+  padding-top: ${size.tabpadding};
+  line-height: 40px;
   width: 30px;
   height: 30px;
 `
@@ -55,10 +59,11 @@ const Body = ({ msg }) =>
       <NavItem to="/assignment-history"><Icon src={Paper} />Assignment History</NavItem>
       <NavItem to="/my-assets"><Icon src={Cube} />My Assets</NavItem>
     </TabContainer>
+    <Route exact path="/" component={Work} />
     <Route exact path="/current-work" component={Work}/>
     <Route exact path="/assignment-history" component={Work}/>
     <Route exact path="/my-assets" component={Work}/>
-    {msg}
+    {/* {msg} */}
   </BodyGrid>
 
 export default Body

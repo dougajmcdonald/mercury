@@ -7,6 +7,7 @@ export const colour = {
   'bluewhite': '#E1EFFF',
   'white': '#FFFFFF',
   'black': '#000000',
+  'orange': '#FF9D00',
   'washed': 'rgba(255,255,255,0.5)'
 }
 

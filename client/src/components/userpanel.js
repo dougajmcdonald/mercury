@@ -11,12 +11,12 @@ const UserPanelGrid = styled.section`
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 60px 1fr;
 
-  line-height: 40px;
+  line-height: 30px;
 `
 
 const Icon = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 `
 
 const UserPanel = () =>
