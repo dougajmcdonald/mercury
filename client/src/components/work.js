@@ -26,6 +26,7 @@ const Icon = styled.img`
 const ExhibitGrid = styled.section`
   display: grid;
   grid-template-rows: 40px 1fr;
+  overflow-y: auto;
 `
 
 const TableTitle = styled.h2`

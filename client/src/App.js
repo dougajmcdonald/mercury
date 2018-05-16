@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { Router } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 
-import logo from './logo.svg'
-
 import 'typeface-roboto-condensed'
 
 import { size, colour } from './style/theme'
@@ -26,6 +24,7 @@ const AppGrid = styled.main`
 const BodyGrid = styled.section`
   display: grid;
   grid-template-rows: 120px 1fr;
+  max-height: 100vh;
 `
 
 const history = createBrowserHistory()

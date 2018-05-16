@@ -22,7 +22,7 @@ const SearchField = styled.input`
   padding: ${size.formpadding};
   color: ${colour.bluewhite};
   font-size: ${size.fontbase};
-  border-radius: 5px;
+  border-radius: 2px;
 `
 
 const TopBar = () =>

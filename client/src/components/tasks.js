@@ -1,14 +1,8 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
-
-import Apple from '../img/logo-apple.svg'
-import Android from '../img/logo-android.svg'
-import Windows from '../img/logo-windows.svg'
-import Phone from '../img/md-phone-portrait.svg'
-import Tablet from '../img/md-tablet-landscape.svg'
-import Desktop from '../img/md-desktop.svg'
 
 const TaskGrid = styled.section`
   display: grid;
@@ -39,6 +33,7 @@ const ExhibitTable = styled.table`
   background-color: ${colour.bluewhite};
   color: ${colour.black};
   padding: ${size.formpadding};
+  border-collapse: collapse;
 
   thead {
     text-align: left;
@@ -49,7 +44,18 @@ const ExhibitTable = styled.table`
   }
 
   tr {
-    line-height: 60px;
+    line-height: 40px;
+  }
+
+  td, th {
+    padding: ${size.formpadding};
+  }
+
+  tbody > tr {
+    :hover {
+      background-color: ${colour.white};
+      cursor: pointer;
+    }
   }
 `
 
@@ -58,17 +64,22 @@ class Tasks extends React.Component {
   constructor(props) {
     super(props)
 
+    console.log(props)
+
     this.state = {
       tasks: [
         {
+          id: 1,
           reference: 'ZZZ/9',
           task: 'Upload something'
         },
         {
+          id: 2,
           reference: 'ABC/1',
           task: 'Backup something'
         },
         {
+          id: 3,
           reference: 'ZZZ/9',
           task: 'Do something'
         },
@@ -77,6 +88,7 @@ class Tasks extends React.Component {
   }
 
   render() {
+    const { activeId } = this.props
     return <TaskGrid>
       <ExhibitGrid>
         <TableTitle>Outstanding tasks</TableTitle>
@@ -84,15 +96,17 @@ class Tasks extends React.Component {
           <thead>
             <tr>
               <th>Exhibit Ref.</th>
-              <th>Tasks</th>
+              <th>Task</th>
             </tr>
           </thead>
           <tbody>
             {this.state.tasks.map(task =>
-              <tr key={task.reference}>
-                <td>{task.reference}</td>
-                <td>{task.task}</td>
-              </tr>
+              <Route key={task.id} render={({ history }) => (
+                <tr onClick={() => history.push(`/task/${task.id}`)}>
+                  <td>{task.reference}</td>
+                  <td>{task.task}</td>
+                </tr>
+              )}/>
             )}
           </tbody>
         </ExhibitTable>

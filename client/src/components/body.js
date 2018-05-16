@@ -6,9 +6,12 @@ import { size, colour } from '../style/theme'
 import Today from '../img/md-today.svg'
 import Paper from '../img/md-paper.svg'
 import Cube from '../img/md-cube.svg'
+import Clipboard from '../img/md-clipboard.svg'
+
 
 import Work from '../components/work'
 import Tasks from '../components/tasks'
+import TaskForm from '../components/taskform'
 
 const BodyGrid = styled.main`
   margin: ${size.grid};
@@ -17,6 +20,7 @@ const BodyGrid = styled.main`
   grid-template-rows: 60px 1fr;
   grid-template-columns: 3fr 1fr;
   grid-column-gap: ${size.grid};
+  height: 100%;
 `
 
 const TabContainer = styled.div`
@@ -54,22 +58,35 @@ const Icon = styled.img`
   height: 30px;
 `
 
-const Body = ({ msg }) =>
+const Body = (props) =>
   <BodyGrid>
+
+    <Route path="/task/:id" render={({ match: { params } }) => (
+      <TabContainer>
+        <NavItem to={`/task/${params.id}`}><Icon src={Today} />Task</NavItem>
+      </TabContainer>
+    )}/>
+    <Route exact path="/" render={() => (
+      <TabContainer>
+        <NavItem to="/"><Icon src={Today} />Current Work</NavItem>
+        <NavItem to="#"><Icon src={Paper} />Assignment History</NavItem>
+        <NavItem to="#"><Icon src={Cube} />My Assets</NavItem>
+      </TabContainer>
+    )}/>
+
     <TabContainer>
-      <NavItem to="/current-work"><Icon src={Today} />Current Work</NavItem>
-      <NavItem to="/assignment-history"><Icon src={Paper} />Assignment History</NavItem>
-      <NavItem to="/my-assets"><Icon src={Cube} />My Assets</NavItem>
+      <NavItem to="/"><Icon src={Clipboard} />Tasks</NavItem>
     </TabContainer>
-    <TabContainer>
-      <NavItem to="/"><Icon src={Today} />Tasks</NavItem>
-    </TabContainer>
+
     <Route exact path="/" component={Work} />
     <Route exact path="/current-work" component={Work}/>
     <Route exact path="/assignment-history" component={Work}/>
     <Route exact path="/my-assets" component={Work}/>
 
+    <Route path="/task/:id" component={TaskForm}/>
+
     <Tasks />
+
     {/* {msg} */}
   </BodyGrid>
 

@@ -6,7 +6,7 @@ import { colour, size } from '../style/theme'
 
 import fingerprint from '../img/md-finger-print.svg'
 import expand from '../img/md-expand.svg'
-import home from '../img/md-home.svg'
+import Grid from '../img/md-grid.svg'
 import filing from '../img/md-filing.svg'
 
 const SidebarGrid = styled.section`
@@ -76,10 +76,10 @@ const Sidebar = () =>
     </Header>
     <Nav>
       <NavItem to="/" exact>
-        <Icon src={home} />
-        Home
+        <Icon src={Grid} />
+        Dashboard
       </NavItem>
-      <NavItem to="/current-work">
+      <NavItem to="/operation-list">
         <Icon src={filing} />
         All Operations
       </NavItem>
