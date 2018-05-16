@@ -1,4 +1,5 @@
 const express = require('express')
+const fetch = require('node-fetch')
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -32,6 +33,34 @@ app.get('/api/task/:id', (req, res) => {
 
   res.send({ task })
 })
+
+
+app.post('/api/task/', (req, res) => {
+
+  const task = req.params.task
+
+  const response = fetch(`http://localhost:8181/`, {
+    body: task, // must match 'Content-Type' header
+    cache: 'no-cache',
+    credentials: 'same-origin', // include, same-origin, *omit
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'POST',
+    mode: 'cors' // no-cors, cors, *same-origin
+  })
+  .then(response => response.json())
+  .then(body => {
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+  }).then(result => res.send({ result }))
+
+
+
+  //res.send({ body })
+})
+
 
 // Listen
 app.listen(port, () => console.log(`Listening on port ${port}`))

@@ -70,10 +70,9 @@ class TaskForm extends React.Component {
       ${jsonTask}\r\n`
     })
 
-    const response = await fetch(`http://localhost:8181/`, {
+    const response = await fetch('/api/task/', {
       body: jsonTask, // must match 'Content-Type' header
       cache: 'no-cache',
-      credentials: 'same-origin', // include, same-origin, *omit
       headers: {
         'content-type': 'application/json'
       },
