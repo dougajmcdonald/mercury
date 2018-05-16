@@ -5,7 +5,7 @@ import { size, colour } from '../style/theme'
 
 const TaskFormGrid = styled.section`
   display: grid;
-  grid-template-rows: 100px 40px 100px 40px 100px 100px;
+  grid-template-rows: 100px 40px 100px 40px 100px 100px 50px;
   padding: ${size.grid};
   background-color: ${colour.backgroundlight};
 `
@@ -42,15 +42,52 @@ const Label = styled.label`
   line-height: 40px;
 `
 
+const Response = styled.pre`
+  color: ${colour.yellow};
+`
+
 class TaskForm extends React.Component {
 
   constructor(props) {
     super(props)
+
+    this.state = {
+      response: ''
+    }
   }
 
   componentDidMount() {
     const { match: { params }} = this.props
     this.props.getTask(params.id)
+  }
+
+  postTask = async (task) => {
+
+    const jsonTask = JSON.stringify(task)
+
+    this.setState({
+      response: this.state.response += `Posting task
+      ${jsonTask}\r\n`
+    })
+
+    const response = await fetch(`http://localhost:8181/`, {
+      body: jsonTask, // must match 'Content-Type' header
+      cache: 'no-cache',
+      credentials: 'same-origin', // include, same-origin, *omit
+      headers: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      mode: 'cors' // no-cors, cors, *same-origin
+    });
+
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+
+    this.setState({ response: body })
   }
 
   render() {
@@ -59,11 +96,17 @@ class TaskForm extends React.Component {
     return <TaskFormGrid>
       <h2>Task - {task && task.task}</h2>
       <Label>Exhibit Ref.</Label>
-      <Input placeholder="Case Id" value={task ? task.reference : ''} width="200px"/>
+      <Input placeholder="Case Id" value={task ? task.reference : ''}/>
 
       <Label>File path</Label>
-      <Input placeholder="File path" value={task ? task.reference : ''}/>
-      <Button type="submit">Start Job</Button>
+      <Input placeholder="File path" value={task ? task.filePath : ''}/>
+
+      <Button type="submit" onClick={() => this.postTask(task)}>Start Job</Button>
+
+      Log:
+      <Response>
+        {this.state.response}
+      </Response>
     </TaskFormGrid>
   }
 }

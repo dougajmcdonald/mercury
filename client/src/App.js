@@ -60,8 +60,6 @@ class App extends Component {
       throw Error(body.message);
     }
 
-    //return body;
-
     this.setState({ task: body.task })
   }
 
