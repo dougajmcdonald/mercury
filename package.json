@@ -5,7 +5,8 @@
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "nifi": "nodemon fakenifiserver.js",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"npm run nifi\""
+    "startwithfakenifi": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"npm run nifi\"",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "express": "^4.16.2",
