@@ -8,20 +8,20 @@ const port = process.env.PORT || 5000
 const tasks = [{
     id: 1,
     reference: 'ZZZ/9',
-    task: 'Process phone numbers',
+    task: 'Extract phone numbers',
     filePath: 'c:/documents/phone_numbers.zip'
   },
   {
     id: 2,
     reference: 'ABC/1',
-    task: 'Examine chat log',
-    filePath: 'c:/documents/chat_log.zip'
+    task: 'Query Twitter Feed',
+    filePath: 'twitter/api/search?myterm'
   },
   {
     id: 3,
     reference: 'ZZZ/9',
-    task: 'View images',
-    filePath: 'c:/documents/holiday_pic.zip'
+    task: 'Ingest DataMinr Report',
+    filePath: 'c:/documents/dataminr.zip'
 }]
 
 // API
