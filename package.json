@@ -4,7 +4,8 @@
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "nifi": "nodemon fakenifiserver.js",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"npm run nifi\""
   },
   "dependencies": {
     "express": "^4.16.2",

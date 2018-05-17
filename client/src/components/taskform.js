@@ -52,7 +52,7 @@ class TaskForm extends React.Component {
     super(props)
 
     this.state = {
-      response: ''
+      log: ''
     }
   }
 
@@ -66,7 +66,7 @@ class TaskForm extends React.Component {
     const jsonTask = JSON.stringify(task)
 
     this.setState({
-      response: this.state.response += `Posting task
+      log: this.state.log += `Posting task
       ${jsonTask}\r\n`
     })
 
@@ -80,13 +80,16 @@ class TaskForm extends React.Component {
       mode: 'cors' // no-cors, cors, *same-origin
     });
 
-    const body = await response.json();
+    const json = await response.json();
 
     if (response.status !== 200) {
-      throw Error(body.message);
+      throw Error(response.message);
     }
 
-    this.setState({ response: body })
+    const log = this.state.log.concat(`Result
+    ${JSON.stringify(json)}\r\n`)
+
+    this.setState({ log })
   }
 
   render() {
@@ -104,7 +107,7 @@ class TaskForm extends React.Component {
 
       Log:
       <Response>
-        {this.state.response}
+        {this.state.log}
       </Response>
     </TaskFormGrid>
   }

@@ -39,26 +39,29 @@ app.post('/api/task/', (req, res) => {
 
   const task = req.params.task
 
-  const response = fetch(`http://localhost:8181/`, {
-    body: task, // must match 'Content-Type' header
+  fetch(`http://localhost:8081/contentListener`, {
+    body: task,
     cache: 'no-cache',
-    credentials: 'same-origin', // include, same-origin, *omit
+    credentials: 'same-origin',
     headers: {
       'content-type': 'application/json'
     },
     method: 'POST',
-    mode: 'cors' // no-cors, cors, *same-origin
+    mode: 'cors'
   })
-  .then(response => response.json())
-  .then(body => {
+  .then(response => {
+
     if (response.status !== 200) {
-      throw Error(body.message);
+      throw Error(response.message);
     }
-  }).then(result => res.send({ result }))
 
+    return response.json()
 
+  })
+  .then(json => {
+    res.send({ result: json.result })
+  })
 
-  //res.send({ body })
 })
 
 
