@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import { Route, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
@@ -57,8 +57,6 @@ const Icon = styled.img`
   width: 30px;
   height: 30px;
 `
-
-const RouteWithProps = ({})
 
 const Body = (props) => {
   const { task, getTask } = props

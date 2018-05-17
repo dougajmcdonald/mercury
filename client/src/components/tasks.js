@@ -10,13 +10,6 @@ const TaskGrid = styled.section`
   background-color: ${colour.backgroundlight};
 `
 
-const Icon = styled.img`
-  width: 25px;
-  height: 25px;
-  padding-left: ${size.tabpadding};
-  padding-right: ${size.tabpadding};
-`
-
 const ExhibitGrid = styled.section`
   display: grid;
   grid-template-rows: 40px 1fr;
@@ -65,28 +58,25 @@ class Tasks extends React.Component {
     super(props)
 
     this.state = {
-      tasks: [
-        {
-          id: 1,
-          reference: 'ZZZ/9',
-          task: 'Upload something'
-        },
-        {
-          id: 2,
-          reference: 'ABC/1',
-          task: 'Backup something'
-        },
-        {
-          id: 3,
-          reference: 'ZZZ/9',
-          task: 'Do something'
-        },
-      ]
+      tasks: []
     }
   }
 
-  selectTask() {
+  componentDidMount() {
+    this.getTasks()
+      .then(res => this.setState({ tasks: res.tasks }))
+      .catch(err => console.log(err))
+  }
 
+  getTasks = async () => {
+    const response = await fetch(`/api/task/`)
+    const body = await response.json()
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+
+    return body
   }
 
   render() {

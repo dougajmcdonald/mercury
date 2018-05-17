@@ -94,7 +94,6 @@ class TaskForm extends React.Component {
 
   render() {
     const { task } = this.props
-    const { match: { params }} = this.props
     return <TaskFormGrid>
       <h2>Task - {task && task.task}</h2>
       <Label>Exhibit Ref.</Label>

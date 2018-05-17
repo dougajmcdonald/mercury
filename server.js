@@ -34,6 +34,12 @@ app.get('/api/task/:id', (req, res) => {
   res.send({ task })
 })
 
+app.get('/api/task', (req, res) => {
+
+  res.send({ tasks })
+
+})
+
 
 app.post('/api/task/', (req, res) => {
 
