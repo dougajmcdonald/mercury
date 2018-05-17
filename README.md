@@ -9,12 +9,12 @@ Contains:
 ## Running in dev
 
 Pre-reqs:
-- Node
-- nodemon - npm i -g nodemon
-- concurrently - npm i -g concurrently
+- Node - Download from web
+- nodemon - `npm i -g nodemon`
+- concurrently - `npm i -g concurrently`
 
 Start:
-- npm start - will start the client and server. App will be accessible on :3000
+- `npm start` - will start the client and server. App will be accessible on :3000
 
 ## Docker
 
