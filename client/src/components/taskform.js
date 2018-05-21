@@ -3,8 +3,9 @@ import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
 
-import TableTitle from '../components/tabletitle'
-import Panel from '../components/panel'
+import TableTitle from './tabletitle'
+import Panel from './panel'
+import Button from './button'
 
 const TaskFormGrid = styled.section`
   display: grid;
@@ -21,22 +22,6 @@ const Input = styled.input`
   height: 40px;
   line-height: 40px;
   color: ${colour.bluewhite};
-`
-const Button = styled.button`
-  background-color: ${colour.bluewhite};
-  font-size: ${size.fontbase};
-  color: ${colour.black};
-  padding: ${size.formpadding};
-  border-radius: 2px;
-  border: none;
-  width: 200px;
-  height: 40px;
-  line-height: 22px;
-
-  :hover {
-    cursor: pointer;
-    background-color: ${colour.white};
-  }
 `
 
 const Label = styled.label`
