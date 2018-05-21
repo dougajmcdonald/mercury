@@ -8,6 +8,7 @@ import Work from '../components/work'
 import Tasks from '../components/tasks'
 import Operations from '../components/operations'
 import TaskForm from '../components/taskform'
+import OperationForm from '../components/operationform'
 import Search from '../components/search'
 
 const BodyGrid = styled.main`
@@ -31,26 +32,31 @@ const ExibitGrid = styled.section`
 `
 
 const Body = (props) => {
-  const { task, getTask, getOperation } = props
+
+  const { task, operation, hits, getTask, getOperation, search } = props
+
   return <BodyGrid>
     <Route exact path="/" render={(props) => (
       <DashboardGrid>
         <Operations getOperation={getOperation} {...props} />
-        <Tasks getTask={props.getTask} />
+        <Tasks getTask={getTask} />
         <Work />
       </DashboardGrid>
     )}/>
-    <Route exact path="/search" render={(props) =>
-      <Search {...props} />} />
     <Route exact path="/operations" render={(props) =>
       <Operations getOperation={getOperation} {...props} />} />
     <Route exact path="/exhibits" render={() => (
       <ExibitGrid>
-        <Work/>
-        <Tasks getTask={props.getTask} />
+        <Work />
+        <Tasks getTask={getTask} />
       </ExibitGrid>
     )} />
+    <Route exact path="/search" render={(props) =>
+      <Search search={search} hits={hits}  {...props} />} />
+
+    {/* Detail pages */}
     <Route path="/task/:id" render={(props) => <TaskForm getTask={getTask} task={task} {...props}  />}/>
+    <Route path="/operation/:id" render={(props) => <OperationForm operation={operation} {...props}  />}/>
   </BodyGrid>
 }
 

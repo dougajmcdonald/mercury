@@ -11,7 +11,7 @@ import Search from '../img/md-search.svg'
 
 const SidebarGrid = styled.section`
   background-color: ${colour.backgrounddark};
-  height: 100vh;
+  height: calc(100vh - 120px);
   width: 240px;
   grid-row-start: 3;
 

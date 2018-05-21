@@ -97,29 +97,80 @@ app.post('/api/task/', (req, res) => {
 
 })
 
-app.get('/api/search', (req, res) => {
+app.get('/api/search/:searchTerm', (req, res) => {
 
-  const client = new elasticsearch.Client({
-    host: 'localhost:9200',
-    log: 'trace'
-  })
+  // const client = new elasticsearch.Client({
+  //   host: 'localhost:9200',
+  //   log: 'trace'
+  // })
 
-  client.search({
-    index: 'twitter',
-    type: 'tweets',
-    body: {
-      query: {
-        match: {
-          body: 'elasticsearch'
-        }
-      }
+  // client.search({
+  //   index: 'file_metadata',
+  //   q: `file:${req.params.searchTerm}`
+  //   body: {
+  //     query: {
+  //       match: {
+  //         body: req.params.searchTerm
+  //       }
+  //     }
+  //   }
+  // }).then(resp => {
+  //     const hits = resp.hits.hits
+  //     res.send({ hits })
+  // }, (err) => {
+  //     console.trace(err.message)
+  // })
+
+  res.send({ hits: [
+    {
+      file: {
+        name: 'file1.txt',
+        size: 128
+      },
+      filepath: 'c:\\file1.txt',
+      case_id: 123,
+      user: 'Doug McDonald',
+      run_id: 1,
+      protective_marking: 'UC',
+      mime: {
+        extension: 'txt',
+        type: 'text/plain'
+      },
+      ingest_time: new Date()
+    },
+    {
+      file: {
+        name: 'file2.txt',
+        size: 256
+      },
+      filepath: 'c:\\file2.txt',
+      case_id: 124,
+      user: 'Rich Fallon',
+      run_id: 2,
+      protective_marking: 'UC',
+      mime: {
+        extension: 'txt',
+        type: 'text/plain'
+      },
+      ingest_time: new Date()
+    },
+    {
+      file: {
+        name: 'file3.txt',
+        size: 1024
+      },
+      filepath: 'c:\\file3.zip',
+      case_id: 125,
+      user: 'Ben Preece',
+      run_id: 3,
+      protective_marking: 'UC',
+      mime: {
+        extension: 'zip',
+        type: 'zip'
+      },
+      ingest_time: new Date()
     }
-  }).then(resp => {
-      const hits = resp.hits.hits
-      res.send({ hits })
-  }, (err) => {
-      console.trace(err.message)
-  })
+  ]})
 
 })
 

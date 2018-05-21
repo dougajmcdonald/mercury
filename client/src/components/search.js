@@ -26,28 +26,71 @@ const SearchField = styled.input`
   margin: ${size.formpadding};
 
 `
-const setSearchTerm = (e) => {
-  console.log(e.target.value)
+
+class Search extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      searchTerm: ''
+    }
+  }
+
+  setSearchTerm = e => {
+    this.setState({ searchTerm: e.target.value })
+  }
+
+  render() {
+    const { search, hits } = this.props
+    return <SearchGrid>
+      <TableTitle>
+        Search
+      </TableTitle>
+      <Panel>
+        <SearchField onChange={this.setSearchTerm} placeholder='Search term'/>
+        <Button onClick={() => search(this.state.searchTerm)}>Search</Button>
+      </Panel>
+
+      <TableTitle>
+        Results
+      </TableTitle>
+      <Panel>
+        <Table>
+          <thead>
+            <tr>
+              <th>Filename</th>
+              <th>Filepath</th>
+              <th>Case ID</th>
+              <th>User</th>
+              <th>Run ID</th>
+              <th>Protective Marking</th>
+              <th>Extension</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Ingest Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {hits ? hits.map(hit =>
+              <tr key={hit.file.name}>
+                <td>{hit.file.name}</td>
+                <td>{hit.filepath}</td>
+                <td>{hit.case_id}</td>
+                <td>{hit.user}</td>
+                <td>{hit.run_id}</td>
+                <td>{hit.protective_marking}</td>
+                <td>{hit.mime.extension}</td>
+                <td>{hit.mime.type}</td>
+                <td>{hit.file.size}</td>
+                <td>{hit.ingest_time}</td>
+              </tr>
+            ) : <tr><td>No Results</td></tr>}
+          </tbody>
+        </Table>
+      </Panel>
+    </SearchGrid>
+  }
 }
-
-const Search = ({ search }) =>
-  <SearchGrid>
-    <TableTitle>
-      Search
-    </TableTitle>
-    <Panel>
-      <SearchField onChange={(e) => setSearchTerm(e)} placeholder='Search term'/>
-      <Button onClick={() => search()}>Search</Button>
-    </Panel>
-
-    <TableTitle>
-      Results
-    </TableTitle>
-    <Panel>
-      <Table>
-
-      </Table>
-    </Panel>
-  </SearchGrid>
 
 export default Search

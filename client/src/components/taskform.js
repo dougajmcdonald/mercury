@@ -9,8 +9,8 @@ import Button from './button'
 
 const TaskFormGrid = styled.section`
   display: grid;
-  grid-template-rows: 60px 60px 60px 100px 60px 100px 50px;
-  padding: ${size.grid};
+  grid-template-rows: 40px 80px 40px 80px 80px 40px 240px;
+  padding: ${size.formpadding};
 `
 
 const Input = styled.input`
@@ -31,6 +31,8 @@ const Label = styled.label`
 
 const Response = styled.pre`
   color: ${colour.yellow};
+  height: 200px;
+  overflow-y: scroll;
 `
 
 class TaskForm extends React.Component {
@@ -82,24 +84,24 @@ class TaskForm extends React.Component {
   render() {
     const { task } = this.props
     return <div>
-        <TableTitle>Task - {task && task.task}</TableTitle>
-        <Panel>
-          <TaskFormGrid>
-          <Label>Exhibit Ref.</Label>
-          <Input placeholder="Case Id" value={task ? task.reference : ''}/>
+      <TableTitle>Task - {task && task.task}</TableTitle>
+      <Panel>
+        <TaskFormGrid>
+        <Label>Exhibit Ref.</Label>
+        <Input placeholder="Case Id" value={task ? task.reference : ''}/>
 
-          <Label>File path</Label>
-          <Input placeholder="File path" value={task ? task.filePath : ''}/>
+        <Label>File path</Label>
+        <Input placeholder="File path" value={task ? task.filePath : ''}/>
 
-          <Button type="submit" onClick={() => this.postTask(task)}>Start Job</Button>
+        <Button type="submit" onClick={() => this.postTask(task)}>Start Job</Button>
 
-          Log:
-          <Response>
-            {this.state.log}
-          </Response>
-          </TaskFormGrid>
-        </Panel>
-      </div>
+        Log:
+        <Response>
+          {this.state.log}
+        </Response>
+        </TaskFormGrid>
+      </Panel>
+    </div>
   }
 }
 
