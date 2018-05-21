@@ -8,23 +8,17 @@ import fingerprint from '../img/md-finger-print.svg'
 import expand from '../img/md-expand.svg'
 import Grid from '../img/md-grid.svg'
 import filing from '../img/md-filing.svg'
+import Cube from '../img/md-cube.svg'
+import Search from '../img/md-search.svg'
 
 const SidebarGrid = styled.section`
   background-color: ${colour.backgrounddark};
   height: 100vh;
   width: 240px;
+  grid-row-start: 3;
 
   display: grid;
-  grid-template-rows: 120px 1fr;
-`
-
-const Header = styled.header`
-  border-bottom: 1px solid ${colour.backgroundlight};
-  padding: ${size.grid};
-
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-
+  grid-template-rows: 40px 1fr;
 `
 
 const Fingerprint = styled.img`
@@ -45,43 +39,60 @@ const Icon = styled.img`
 `
 
 const Nav = styled.nav`
-  margin-top: ${size.grid};
 
   a.active {
-    background-color: ${colour.background};
+    background-color: ${colour.backgroundlight};
+    border-left: 5px solid ${colour.yellow};
   }
 `
 
 const NavItem = styled(NavLink)`
   display: grid;
   grid-template-columns: 60px 1fr;
+  background-color: ${colour.background};
 
   padding: ${size.grid};
 
   text-decoration: none;
   color: ${colour.bluewhite};
   line-height: 30px;
+  border-left: 5px solid ${colour.backgrounddark};
 
   :hover {
     color: ${colour.white};
+    border-left: 5px solid ${colour.yellow};
   }
+`
 
+const User = styled.div`
+  background-color: ${colour.backgrounddark};
+  color: ${colour.orange};
+  padding-left: ${size.grid};
+  font-size: ${size.fontsmall};
+  line-height: 40px;
 `
 
 const Sidebar = () =>
   <SidebarGrid>
-    <Header>
-      <Fingerprint src={fingerprint} />
-      National Case Manager
-    </Header>
+    <User>
+      Doug McDonald
+    </User>
     <Nav>
       <NavItem to="/" exact>
         <Icon src={Grid} />
         Dashboard
       </NavItem>
-      <NavItem to="/operation-list">
+      <NavItem to="/operations">
         <Icon src={filing} />
-        All Operations
+        Operations
+      </NavItem>
+      <NavItem to="/exhibits">
+        <Icon src={Cube} />
+        Exhibits
+      </NavItem>
+      <NavItem to="/search">
+        <Icon src={Search} />
+        Search
       </NavItem>
     </Nav>
   </SidebarGrid>

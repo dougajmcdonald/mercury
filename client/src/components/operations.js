@@ -4,10 +4,12 @@ import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
 
-const TaskGrid = styled.section`
+const Grid = styled.section`
   display: grid;
   padding: ${size.grid};
   background-color: ${colour.background};
+  min-height: 300px;
+  border-radius: 2px;
 `
 
 const ExhibitGrid = styled.section`
@@ -22,24 +24,24 @@ const TableTitle = styled.h2`
   font-size: ${size.fontbase};
 `
 
-class Tasks extends React.Component {
+class Operations extends React.Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
-      tasks: []
+      items: []
     }
   }
 
   componentDidMount() {
-    this.getTasks()
-      .then(res => this.setState({ tasks: res.tasks }))
+    this.getOperations()
+      .then(res => this.setState({ items: res.operations }))
       .catch(err => console.log(err))
   }
 
-  getTasks = async () => {
-    const response = await fetch(`/api/task/`)
+  getOperations = async () => {
+    const response = await fetch(`/api/operation/`)
     const body = await response.json()
 
     if (response.status !== 200) {
@@ -50,33 +52,33 @@ class Tasks extends React.Component {
   }
 
   render() {
-    return <TaskGrid>
+    return <Grid>
       <ExhibitGrid>
-        <TableTitle>Outstanding tasks</TableTitle>
+        <TableTitle>Operations</TableTitle>
         <Table>
           <thead>
             <tr>
-              <th>Exhibit Ref.</th>
+              <th>Operation</th>
               <th>Task</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.tasks.map(task =>
-              <Route key={task.id} render={({ history }) => (
+            {this.state.items.map(item =>
+              <Route key={item.id} render={({ history }) => (
                 <tr onClick={() => {
-                    this.props.getTask(task.id)
-                    history.push(`/task/${task.id}`)
+                    this.props.getOperation(item.id)
+                    history.push(`/operation/${item.id}`)
                   }}>
-                  <td>{task.reference}</td>
-                  <td>{task.task}</td>
+                  <td>{item.operation}</td>
+                  <td>{item.reference}</td>
                 </tr>
               )}/>
             )}
           </tbody>
         </Table>
       </ExhibitGrid>
-    </TaskGrid>
+    </Grid>
   }
 }
 
-export default Tasks
+export default Operations

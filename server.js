@@ -1,5 +1,6 @@
 const express = require('express')
 const fetch = require('node-fetch')
+const elastic = require('elasticsearch')
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -24,6 +25,22 @@ const tasks = [{
     filePath: 'c:/documents/dataminr.zip'
 }]
 
+const operations = [{
+  id: 1,
+  reference: 'ZZZ/9',
+  operation: 'Fuzzy Clam'
+},
+{
+  id: 2,
+  reference: 'ABC/1',
+  operation: 'Steel Dog'
+},
+{
+  id: 3,
+  reference: 'ZZZ/9',
+  operation: 'Slippery Weasel'
+}]
+
 // API
 app.get('/api/task/:id', (req, res) => {
 
@@ -35,11 +52,21 @@ app.get('/api/task/:id', (req, res) => {
 })
 
 app.get('/api/task', (req, res) => {
-
   res.send({ tasks })
-
 })
 
+app.get('/api/operation', (req, res) => {
+  res.send({ operations })
+})
+
+app.get('/api/operation/:id', (req, res) => {
+
+  const id = parseInt(req.params.id, 10)
+
+  const operation = operations.find(t => t.id == id)
+
+  res.send({ operation })
+})
 
 app.post('/api/task/', (req, res) => {
 
@@ -66,6 +93,32 @@ app.post('/api/task/', (req, res) => {
   })
   .then(json => {
     res.send({ result: json.result })
+  })
+
+})
+
+app.get('/api/search', (req, res) => {
+
+  const client = new elasticsearch.Client({
+    host: 'localhost:9200',
+    log: 'trace'
+  })
+
+  client.search({
+    index: 'twitter',
+    type: 'tweets',
+    body: {
+      query: {
+        match: {
+          body: 'elasticsearch'
+        }
+      }
+    }
+  }).then(resp => {
+      const hits = resp.hits.hits
+      res.send({ hits })
+  }, (err) => {
+      console.trace(err.message)
   })
 
 })
