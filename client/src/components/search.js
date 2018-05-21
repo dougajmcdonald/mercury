@@ -26,16 +26,18 @@ const SearchField = styled.input`
   margin: ${size.formpadding};
 
 `
+const setSearchTerm = (e) => {
+  console.log(e.target.value)
+}
 
-
-const Search = () =>
+const Search = ({ search }) =>
   <SearchGrid>
     <TableTitle>
       Search
     </TableTitle>
     <Panel>
-      <SearchField placeholder='Search term'/>
-      <Button>Search</Button>
+      <SearchField onChange={(e) => setSearchTerm(e)} placeholder='Search term'/>
+      <Button onClick={() => search()}>Search</Button>
     </Panel>
 
     <TableTitle>

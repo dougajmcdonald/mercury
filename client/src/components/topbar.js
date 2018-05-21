@@ -6,8 +6,6 @@ import { colour, size } from '../style/theme'
 
 import Halo from '../img/md-aperture.svg'
 
-import UserPanel from './userpanel'
-
 const TopBarGrid = styled.section`
   display: grid;
   grid-template-columns: 240px 1fr;

@@ -19,18 +19,6 @@ const SidebarGrid = styled.section`
   grid-template-rows: 40px 1fr;
 `
 
-const Fingerprint = styled.img`
-  width: 50px;
-  height: 58px;
-`
-
-const Expand = styled.img`
-  width: 60px;
-  height: 60px;
-  margin-top: -30px;
-  margin-left: -5px;
-`
-
 const Icon = styled.img`
   width: 30px;
   height: 30px;
