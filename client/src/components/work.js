@@ -3,6 +3,10 @@ import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
 
+import Table from './table'
+import TableTitle from './tabletitle'
+import Panel from './panel'
+
 import Apple from '../img/logo-apple.svg'
 import Android from '../img/logo-android.svg'
 import Windows from '../img/logo-windows.svg'
@@ -11,9 +15,9 @@ import Tablet from '../img/md-tablet-landscape.svg'
 import Desktop from '../img/md-desktop.svg'
 
 const WorkGrid = styled.section`
-  display: grid;
-  padding: ${size.grid};
   background-color: ${colour.backgroundlight};
+  display: grid;
+  grid-template-rows: 40px 1fr;
 `
 
 const Icon = styled.img`
@@ -21,37 +25,6 @@ const Icon = styled.img`
   height: 25px;
   padding-left: ${size.tabpadding};
   padding-right: ${size.tabpadding};
-`
-
-const ExhibitGrid = styled.section`
-  display: grid;
-  grid-template-rows: 40px 1fr;
-  overflow-y: auto;
-`
-
-const TableTitle = styled.h2`
-  color: ${colour.orange};
-  margin: 0;
-  font-weight: 400;
-  font-size: ${size.fontbase};
-`
-
-const ExhibitTable = styled.table`
-  background-color: ${colour.bluewhite};
-  color: ${colour.black};
-  padding: ${size.formpadding};
-
-  thead {
-    text-align: left;
-  }
-
-  thead > tr > th {
-    border-bottom: 1px solid ${colour.black};
-  }
-
-  tr {
-    line-height: 60px;
-  }
 `
 
 class Work extends React.Component {
@@ -114,9 +87,9 @@ class Work extends React.Component {
 
   render() {
     return <WorkGrid>
-      <ExhibitGrid>
-        <TableTitle>Your Exhibits</TableTitle>
-        <ExhibitTable>
+      <TableTitle>Your Exhibits</TableTitle>
+      <Panel>
+        <Table>
           <thead>
             <tr>
               <th>Operation</th>
@@ -139,8 +112,8 @@ class Work extends React.Component {
               </tr>
             )}
           </tbody>
-        </ExhibitTable>
-      </ExhibitGrid>
+        </Table>
+      </Panel>
     </WorkGrid>
   }
 }

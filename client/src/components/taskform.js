@@ -3,11 +3,14 @@ import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
 
+import TableTitle from './tabletitle'
+import Panel from './panel'
+import Button from './button'
+
 const TaskFormGrid = styled.section`
   display: grid;
-  grid-template-rows: 100px 40px 100px 40px 100px 100px 50px;
+  grid-template-rows: 60px 60px 60px 100px 60px 100px 50px;
   padding: ${size.grid};
-  background-color: ${colour.backgroundlight};
 `
 
 const Input = styled.input`
@@ -19,22 +22,6 @@ const Input = styled.input`
   height: 40px;
   line-height: 40px;
   color: ${colour.bluewhite};
-`
-const Button = styled.button`
-  background-color: ${colour.bluewhite};
-  font-size: ${size.fontbase};
-  color: ${colour.black};
-  padding: ${size.formpadding};
-  border-radius: 2px;
-  border: none;
-  width: 200px;
-  height: 40px;
-  line-height: 22px;
-
-  :hover {
-    cursor: pointer;
-    background-color: ${colour.white};
-  }
 `
 
 const Label = styled.label`
@@ -94,21 +81,25 @@ class TaskForm extends React.Component {
 
   render() {
     const { task } = this.props
-    return <TaskFormGrid>
-      <h2>Task - {task && task.task}</h2>
-      <Label>Exhibit Ref.</Label>
-      <Input placeholder="Case Id" value={task ? task.reference : ''}/>
+    return <div>
+        <TableTitle>Task - {task && task.task}</TableTitle>
+        <Panel>
+          <TaskFormGrid>
+          <Label>Exhibit Ref.</Label>
+          <Input placeholder="Case Id" value={task ? task.reference : ''}/>
 
-      <Label>File path</Label>
-      <Input placeholder="File path" value={task ? task.filePath : ''}/>
+          <Label>File path</Label>
+          <Input placeholder="File path" value={task ? task.filePath : ''}/>
 
-      <Button type="submit" onClick={() => this.postTask(task)}>Start Job</Button>
+          <Button type="submit" onClick={() => this.postTask(task)}>Start Job</Button>
 
-      Log:
-      <Response>
-        {this.state.log}
-      </Response>
-    </TaskFormGrid>
+          Log:
+          <Response>
+            {this.state.log}
+          </Response>
+          </TaskFormGrid>
+        </Panel>
+      </div>
   }
 }
 

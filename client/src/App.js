@@ -4,18 +4,18 @@ import { Router } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import 'typeface-roboto-condensed'
+import 'typeface-montserrat'
 
 import { size, colour } from './style/theme'
 import Sidebar from './components/sidebar'
 import Body from './components/body'
 import TopBar from './components/topbar'
+import BreadcrumbBar from './components/breadcrumbbar'
 
 const AppGrid = styled.main`
   display: grid;
+  grid-template-rows: 60px 60px 1fr;
   grid-template-columns: 240px 1fr;
-
-  grid-row-gap: ${size.grid};
-  grid-column-gap: ${size.grid};
 
   color: ${colour.bluewhite};
   font-size: ${size.fontbase};
@@ -23,7 +23,6 @@ const AppGrid = styled.main`
 
 const BodyGrid = styled.section`
   display: grid;
-  grid-template-rows: 120px 1fr;
   max-height: 100vh;
 `
 
@@ -63,15 +62,27 @@ class App extends Component {
     this.setState({ task: body.task })
   }
 
+  getOperation = async (id) => {
+    const response = await fetch(`/api/operation/${id}`);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+
+    this.setState({ operation: body.operation })
+  }
+
 
   render() {
     return (
       <Router history={history}>
         <AppGrid>
+          <TopBar />
+          <BreadcrumbBar />
           <Sidebar />
           <BodyGrid>
-            <TopBar />
-            <Body task={this.state.task} getTask={this.getTask}/>
+            <Body task={this.state.task} getTask={this.getTask} getOperation={this.getOperation}/>
           </BodyGrid>
         </AppGrid>
       </Router>

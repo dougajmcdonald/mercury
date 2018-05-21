@@ -12,6 +12,11 @@ Pre-reqs:
 - Node - Download from web
 - nodemon - `npm i -g nodemon`
 - concurrently - `npm i -g concurrently`
+- yarn - `npm i -g yarn`
+
+Dependencies:
+- Server - `npm i` from the root of the repo
+- Client - `npm i` from the `/client` folder
 
 Start:
 - `npm start` - will start the client and server. App will be accessible on :3000
