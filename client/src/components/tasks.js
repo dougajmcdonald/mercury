@@ -3,24 +3,19 @@ import { Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
+
 import Table from './table'
+import TableTitle from './tabletitle'
+import Panel from './panel'
 
 const TaskGrid = styled.section`
-  display: grid;
-  padding: ${size.grid};
   background-color: ${colour.background};
-`
-
-const ExhibitGrid = styled.section`
   display: grid;
   grid-template-rows: 40px 1fr;
 `
 
-const TableTitle = styled.h2`
-  color: ${colour.orange};
-  margin: 0;
-  font-weight: 400;
-  font-size: ${size.fontbase};
+const ExhibitGrid = styled.section`
+  display: grid;
 `
 
 class Tasks extends React.Component {
@@ -52,8 +47,8 @@ class Tasks extends React.Component {
 
   render() {
     return <TaskGrid>
-      <ExhibitGrid>
-        <TableTitle>Outstanding tasks</TableTitle>
+      <TableTitle>Outstanding tasks</TableTitle>
+      <Panel>
         <Table>
           <thead>
             <tr>
@@ -75,7 +70,7 @@ class Tasks extends React.Component {
             )}
           </tbody>
         </Table>
-      </ExhibitGrid>
+      </Panel>
     </TaskGrid>
   }
 }

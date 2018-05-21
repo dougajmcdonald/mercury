@@ -4,10 +4,8 @@ import styled from 'styled-components'
 
 import { colour, size } from '../style/theme'
 
-import fingerprint from '../img/md-finger-print.svg'
-import expand from '../img/md-expand.svg'
 import Grid from '../img/md-grid.svg'
-import filing from '../img/md-filing.svg'
+import Filing from '../img/md-filing.svg'
 import Cube from '../img/md-cube.svg'
 import Search from '../img/md-search.svg'
 
@@ -83,7 +81,7 @@ const Sidebar = () =>
         Dashboard
       </NavItem>
       <NavItem to="/operations">
-        <Icon src={filing} />
+        <Icon src={Filing} />
         Operations
       </NavItem>
       <NavItem to="/exhibits">

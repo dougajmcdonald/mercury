@@ -13,7 +13,7 @@ export const colour = {
 
 export const size = {
   'grid': '20px',
-  'fontbase': '16px',
+  'fontbase': '14px',
   'fontsmall': '12px',
   'formpadding': '10px',
   'tabpadding': '5px'

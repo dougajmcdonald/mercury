@@ -18,14 +18,18 @@ import Search from '../components/search'
 const BodyGrid = styled.main`
   margin: ${size.grid};
   display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 3fr 1fr;
   grid-column-gap: ${size.grid};
+`
+const DashboardGrid = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: ${size.grid};
+  grid-row-gap: ${size.grid};
 `
 
 const TabContainer = styled.div`
   display: grid;
-  grid-template-columns: minmax(100px, 250px) repeat(auto-fit, 300px);
 
   .active {
     background-color: ${colour.backgroundlight};
@@ -58,36 +62,38 @@ const Icon = styled.img`
   height: 30px;
 `
 
+const ExibitGrid = styled.section`
+  display: grid;
+  grid-column-gap: ${size.grid};
+  grid-row-gap: ${size.grid};
+  grid-template-rows: 1fr 1fr;
+`
+
 const Body = (props) => {
   const { task, getTask, getOperation } = props
   return <BodyGrid>
-
-    <Route path="/task/:id" render={({ match: { params } }) => (
-      <TabContainer>
-        <NavItem to={`/task/${params.id}`}><Icon src={Today} />Task</NavItem>
-      </TabContainer>
-    )}/>
-
-    <Route exact path="/" render={() => (
-      <TabContainer>
-        <NavItem to="/"><Icon src={Today} />Current Work</NavItem>
-        <NavItem to="#"><Icon src={Paper} />Assignment History</NavItem>
-        <NavItem to="/exhibits"><Icon src={Cube} />My Assets</NavItem>
-      </TabContainer>
+    <Route exact path="/" render={(props) => (
+      <DashboardGrid>
+        <Operations getOperation={getOperation} {...props} />
+        <Tasks getTask={props.getTask} />
+        <Work />
+      </DashboardGrid>
     )}/>
     <Route exact path="/search" render={(props) =>
       <Search {...props} />} />
     <Route exact path="/operations" render={(props) =>
       <Operations getOperation={getOperation} {...props} />} />
-    <Route exact path="/exhibits" render={() => {
-      return <div><Work/><Tasks getTask={props.getTask} /></div>
-    }} />
+    <Route exact path="/exhibits" render={() => (
+      <ExibitGrid>
+        <Work/>
+        <Tasks getTask={props.getTask} />
+      </ExibitGrid>
+    )} />
     {/* <Route exact path="/current-work" component={Work}/>
     <Route exact path="/assignment-history" component={Work}/>
     <Route exact path="/my-assets" component={Work}/> */}
     <Route path="/task/:id" render={(props) => <TaskForm getTask={getTask} task={task} {...props}  />}/>
 
-    {/* {msg} */}
   </BodyGrid>
 }
 

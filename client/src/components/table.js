@@ -6,8 +6,8 @@ import { size, colour } from '../style/theme'
 const Table = styled.table`
   margin: ${size.formpadding};
   background-color: ${colour.background};
-  padding: ${size.formpadding};
   border-collapse: collapse;
+  width: calc(100% - ${size.formpadding} - ${size.formpadding});
 
   thead {
     text-align: left;

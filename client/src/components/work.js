@@ -5,6 +5,7 @@ import { size, colour } from '../style/theme'
 
 import Table from './table'
 import TableTitle from './tabletitle'
+import Panel from './panel'
 
 import Apple from '../img/logo-apple.svg'
 import Android from '../img/logo-android.svg'
@@ -14,8 +15,9 @@ import Tablet from '../img/md-tablet-landscape.svg'
 import Desktop from '../img/md-desktop.svg'
 
 const WorkGrid = styled.section`
-  display: grid;
   background-color: ${colour.backgroundlight};
+  display: grid;
+  grid-template-rows: 40px 1fr;
 `
 
 const Icon = styled.img`
@@ -23,12 +25,6 @@ const Icon = styled.img`
   height: 25px;
   padding-left: ${size.tabpadding};
   padding-right: ${size.tabpadding};
-`
-
-const ExhibitGrid = styled.section`
-  display: grid;
-  grid-template-rows: 40px 1fr;
-  overflow-y: auto;
 `
 
 class Work extends React.Component {
@@ -91,8 +87,8 @@ class Work extends React.Component {
 
   render() {
     return <WorkGrid>
-      <ExhibitGrid>
-        <TableTitle>Your Exhibits</TableTitle>
+      <TableTitle>Your Exhibits</TableTitle>
+      <Panel>
         <Table>
           <thead>
             <tr>
@@ -117,7 +113,7 @@ class Work extends React.Component {
             )}
           </tbody>
         </Table>
-      </ExhibitGrid>
+      </Panel>
     </WorkGrid>
   }
 }

@@ -3,11 +3,13 @@ import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
 
+import TableTitle from '../components/tabletitle'
+import Panel from '../components/panel'
+
 const TaskFormGrid = styled.section`
   display: grid;
-  grid-template-rows: 100px 40px 100px 40px 100px 100px 50px;
+  grid-template-rows: 60px 60px 60px 100px 60px 100px 50px;
   padding: ${size.grid};
-  background-color: ${colour.backgroundlight};
 `
 
 const Input = styled.input`
@@ -94,21 +96,25 @@ class TaskForm extends React.Component {
 
   render() {
     const { task } = this.props
-    return <TaskFormGrid>
-      <h2>Task - {task && task.task}</h2>
-      <Label>Exhibit Ref.</Label>
-      <Input placeholder="Case Id" value={task ? task.reference : ''}/>
+    return <div>
+        <TableTitle>Task - {task && task.task}</TableTitle>
+        <Panel>
+          <TaskFormGrid>
+          <Label>Exhibit Ref.</Label>
+          <Input placeholder="Case Id" value={task ? task.reference : ''}/>
 
-      <Label>File path</Label>
-      <Input placeholder="File path" value={task ? task.filePath : ''}/>
+          <Label>File path</Label>
+          <Input placeholder="File path" value={task ? task.filePath : ''}/>
 
-      <Button type="submit" onClick={() => this.postTask(task)}>Start Job</Button>
+          <Button type="submit" onClick={() => this.postTask(task)}>Start Job</Button>
 
-      Log:
-      <Response>
-        {this.state.log}
-      </Response>
-    </TaskFormGrid>
+          Log:
+          <Response>
+            {this.state.log}
+          </Response>
+          </TaskFormGrid>
+        </Panel>
+      </div>
   }
 }
 
