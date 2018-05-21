@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { size, colour } from '../style/theme'
+import { colour } from '../style/theme'
 
 import Table from './table'
 import TableTitle from './tabletitle'
@@ -12,10 +12,6 @@ const TaskGrid = styled.section`
   background-color: ${colour.background};
   display: grid;
   grid-template-rows: 40px 1fr;
-`
-
-const ExhibitGrid = styled.section`
-  display: grid;
 `
 
 class Tasks extends React.Component {

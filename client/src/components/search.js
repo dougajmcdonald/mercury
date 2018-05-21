@@ -27,25 +27,70 @@ const SearchField = styled.input`
 
 `
 
+class Search extends React.Component {
 
-const Search = () =>
-  <SearchGrid>
-    <TableTitle>
-      Search
-    </TableTitle>
-    <Panel>
-      <SearchField placeholder='Search term'/>
-      <Button>Search</Button>
-    </Panel>
+  constructor(props) {
+    super(props)
 
-    <TableTitle>
-      Results
-    </TableTitle>
-    <Panel>
-      <Table>
+    this.state = {
+      searchTerm: ''
+    }
+  }
 
-      </Table>
-    </Panel>
-  </SearchGrid>
+  setSearchTerm = e => {
+    this.setState({ searchTerm: e.target.value })
+  }
+
+  render() {
+    const { search, hits } = this.props
+    return <SearchGrid>
+      <TableTitle>
+        Search
+      </TableTitle>
+      <Panel>
+        <SearchField onChange={this.setSearchTerm} placeholder='Search term'/>
+        <Button onClick={() => search(this.state.searchTerm)}>Search</Button>
+      </Panel>
+
+      <TableTitle>
+        Results
+      </TableTitle>
+      <Panel>
+        <Table>
+          <thead>
+            <tr>
+              <th>Filename</th>
+              <th>Filepath</th>
+              <th>Case ID</th>
+              <th>User</th>
+              <th>Run ID</th>
+              <th>Protective Marking</th>
+              <th>Extension</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Ingest Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {hits ? hits.map(hit =>
+              <tr key={hit.file.name}>
+                <td>{hit.file.name}</td>
+                <td>{hit.filepath}</td>
+                <td>{hit.case_id}</td>
+                <td>{hit.user}</td>
+                <td>{hit.run_id}</td>
+                <td>{hit.protective_marking}</td>
+                <td>{hit.mime.extension}</td>
+                <td>{hit.mime.type}</td>
+                <td>{hit.file.size}</td>
+                <td>{hit.ingest_time}</td>
+              </tr>
+            ) : <tr><td>No Results</td></tr>}
+          </tbody>
+        </Table>
+      </Panel>
+    </SearchGrid>
+  }
+}
 
 export default Search

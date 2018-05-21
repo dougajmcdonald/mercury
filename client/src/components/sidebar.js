@@ -11,24 +11,12 @@ import Search from '../img/md-search.svg'
 
 const SidebarGrid = styled.section`
   background-color: ${colour.backgrounddark};
-  height: 100vh;
+  height: calc(100vh - 120px);
   width: 240px;
   grid-row-start: 3;
 
   display: grid;
   grid-template-rows: 40px 1fr;
-`
-
-const Fingerprint = styled.img`
-  width: 50px;
-  height: 58px;
-`
-
-const Expand = styled.img`
-  width: 60px;
-  height: 60px;
-  margin-top: -30px;
-  margin-left: -5px;
 `
 
 const Icon = styled.img`

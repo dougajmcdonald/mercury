@@ -1,18 +1,14 @@
 import React from 'react'
-import { Route, NavLink } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { size, colour } from '../style/theme'
-import Today from '../img/md-today.svg'
-import Paper from '../img/md-paper.svg'
-import Cube from '../img/md-cube.svg'
-import Clipboard from '../img/md-clipboard.svg'
-
+import { size } from '../style/theme'
 
 import Work from '../components/work'
 import Tasks from '../components/tasks'
 import Operations from '../components/operations'
 import TaskForm from '../components/taskform'
+import OperationForm from '../components/operationform'
 import Search from '../components/search'
 
 const BodyGrid = styled.main`
@@ -28,40 +24,6 @@ const DashboardGrid = styled.section`
   grid-row-gap: ${size.grid};
 `
 
-const TabContainer = styled.div`
-  display: grid;
-
-  .active {
-    background-color: ${colour.backgroundlight};
-  }
-`
-
-const NavItem = styled(NavLink)`
-  display: grid;
-  grid-template-columns: 50px 1fr;
-
-  padding: ${size.formpadding};
-  padding-left: ${size.grid};
-  margin-right: ${size.formpadding};
-
-  text-decoration: none;
-  color: ${colour.bluewhite};
-  background-color: ${colour.backgrounddark};
-  line-height: 40px;
-
-  :hover {
-    color: ${colour.white};
-    background-color: ${colour.backgroundlight};
-  }
-`
-
-const Icon = styled.img`
-  padding-top: ${size.tabpadding};
-  line-height: 40px;
-  width: 30px;
-  height: 30px;
-`
-
 const ExibitGrid = styled.section`
   display: grid;
   grid-column-gap: ${size.grid};
@@ -70,30 +32,31 @@ const ExibitGrid = styled.section`
 `
 
 const Body = (props) => {
-  const { task, getTask, getOperation } = props
+
+  const { task, operation, hits, getTask, getOperation, search } = props
+
   return <BodyGrid>
     <Route exact path="/" render={(props) => (
       <DashboardGrid>
         <Operations getOperation={getOperation} {...props} />
-        <Tasks getTask={props.getTask} />
+        <Tasks getTask={getTask} />
         <Work />
       </DashboardGrid>
     )}/>
-    <Route exact path="/search" render={(props) =>
-      <Search {...props} />} />
     <Route exact path="/operations" render={(props) =>
       <Operations getOperation={getOperation} {...props} />} />
     <Route exact path="/exhibits" render={() => (
       <ExibitGrid>
-        <Work/>
-        <Tasks getTask={props.getTask} />
+        <Work />
+        <Tasks getTask={getTask} />
       </ExibitGrid>
     )} />
-    {/* <Route exact path="/current-work" component={Work}/>
-    <Route exact path="/assignment-history" component={Work}/>
-    <Route exact path="/my-assets" component={Work}/> */}
-    <Route path="/task/:id" render={(props) => <TaskForm getTask={getTask} task={task} {...props}  />}/>
+    <Route exact path="/search" render={(props) =>
+      <Search search={search} hits={hits}  {...props} />} />
 
+    {/* Detail pages */}
+    <Route path="/task/:id" render={(props) => <TaskForm getTask={getTask} task={task} {...props}  />}/>
+    <Route path="/operation/:id" render={(props) => <OperationForm operation={operation} {...props}  />}/>
   </BodyGrid>
 }
 

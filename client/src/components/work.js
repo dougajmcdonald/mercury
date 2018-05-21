@@ -18,6 +18,7 @@ const WorkGrid = styled.section`
   background-color: ${colour.backgroundlight};
   display: grid;
   grid-template-rows: 40px 1fr;
+  grid-column: 1/3;
 `
 
 const Icon = styled.img`

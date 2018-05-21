@@ -23,7 +23,7 @@ const AppGrid = styled.main`
 
 const BodyGrid = styled.section`
   display: grid;
-  max-height: 100vh;
+  height: calc(100vh - 120px);
 `
 
 const history = createBrowserHistory()
@@ -41,30 +41,30 @@ class App extends Component {
   }
 
   callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
+    const response = await fetch('/api/hello')
+    const body = await response.json()
 
     if (response.status !== 200) {
-      throw Error(body.message);
+      throw Error(body.message)
     }
 
     return body;
   }
 
   getTask = async (id) => {
-    const response = await fetch(`/api/task/${id}`);
-    const body = await response.json();
+    const response = await fetch(`/api/task/${id}`)
+    const body = await response.json()
 
     if (response.status !== 200) {
-      throw Error(body.message);
+      throw Error(body.message)
     }
 
     this.setState({ task: body.task })
   }
 
   getOperation = async (id) => {
-    const response = await fetch(`/api/operation/${id}`);
-    const body = await response.json();
+    const response = await fetch(`/api/operation/${id}`)
+    const body = await response.json()
 
     if (response.status !== 200) {
       throw Error(body.message);
@@ -73,6 +73,16 @@ class App extends Component {
     this.setState({ operation: body.operation })
   }
 
+  search = async (searchTerm) => {
+    const response = await fetch(`/api/search/${searchTerm}`)
+    const body = await response.json()
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+
+    this.setState({ hits: body.hits })
+  }
 
   render() {
     return (
@@ -82,11 +92,17 @@ class App extends Component {
           <BreadcrumbBar />
           <Sidebar />
           <BodyGrid>
-            <Body task={this.state.task} getTask={this.getTask} getOperation={this.getOperation}/>
+            <Body
+              search={this.search}
+              hits={this.state.hits}
+              task={this.state.task}
+              operation={this.state.operation}
+              getTask={this.getTask}
+              getOperation={this.getOperation}/>
           </BodyGrid>
         </AppGrid>
       </Router>
-    );
+    )
   }
 }
 
