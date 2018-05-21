@@ -4,9 +4,11 @@ import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
 
+import Table from './table'
+import TableTitle from './tabletitle'
+
 const Grid = styled.section`
   display: grid;
-  padding: ${size.grid};
   background-color: ${colour.background};
   min-height: 300px;
   border-radius: 2px;
@@ -15,13 +17,6 @@ const Grid = styled.section`
 const ExhibitGrid = styled.section`
   display: grid;
   grid-template-rows: 40px 1fr;
-`
-
-const TableTitle = styled.h2`
-  color: ${colour.orange};
-  margin: 0;
-  font-weight: 400;
-  font-size: ${size.fontbase};
 `
 
 class Operations extends React.Component {

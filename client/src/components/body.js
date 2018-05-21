@@ -13,6 +13,7 @@ import Work from '../components/work'
 import Tasks from '../components/tasks'
 import Operations from '../components/operations'
 import TaskForm from '../components/taskform'
+import Search from '../components/search'
 
 const BodyGrid = styled.main`
   margin: ${size.grid};
@@ -74,8 +75,10 @@ const Body = (props) => {
         <NavItem to="/exhibits"><Icon src={Cube} />My Assets</NavItem>
       </TabContainer>
     )}/>
-
-    <Route exact path="/operations" render={(props) => <Operations getOperation={getOperation} {...props} />} />
+    <Route exact path="/search" render={(props) =>
+      <Search {...props} />} />
+    <Route exact path="/operations" render={(props) =>
+      <Operations getOperation={getOperation} {...props} />} />
     <Route exact path="/exhibits" render={() => {
       return <div><Work/><Tasks getTask={props.getTask} /></div>
     }} />

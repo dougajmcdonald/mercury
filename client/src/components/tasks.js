@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { size, colour } from '../style/theme'
+import Table from './table'
 
 const TaskGrid = styled.section`
   display: grid;

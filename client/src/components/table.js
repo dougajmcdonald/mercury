@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { size, colour } from '../style/theme'
 
 const Table = styled.table`
+  margin: ${size.formpadding};
   background-color: ${colour.background};
-  color: ${colour.black};
   padding: ${size.formpadding};
   border-collapse: collapse;
 
@@ -15,6 +15,7 @@ const Table = styled.table`
 
   thead > tr > th {
     border-bottom: 1px solid ${colour.white};
+    font-weight: normal;
   }
 
   tr {
