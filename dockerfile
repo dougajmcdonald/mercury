@@ -1,10 +1,12 @@
-FROM node:alpine
+FROM node:carbon
 
 # Create app directory in image
 WORKDIR /usr/src/app
 
 # Add global dependecnies
-RUN npm i -g npm nodemon concurrently
+RUN npm i -g npm
+RUN npm i -g nodemon
+RUN npm i -g concurrently
 
 # Install app dependencies for server
 COPY package*.json /usr/src/app/
@@ -19,7 +21,9 @@ COPY client/package*.json /usr/src/app/client/
 RUN npm install
 
 # Bundle app source
-COPY . .
+COPY . /usr/src/app/
+
+WORKDIR /usr/src/app/
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
