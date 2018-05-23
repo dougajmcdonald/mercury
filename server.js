@@ -27,18 +27,18 @@ const tasks = [{
 
 const operations = [{
   id: 1,
-  reference: 'ZZZ/9',
-  operation: 'Fuzzy Clam'
+  reference: 'SU/9',
+  operation: 'SEA URCHIN'
 },
 {
   id: 2,
-  reference: 'ABC/1',
-  operation: 'Steel Dog'
+  reference: 'SD/1',
+  operation: 'STEEL DOG'
 },
 {
   id: 3,
-  reference: 'ZZZ/9',
-  operation: 'Slippery Weasel'
+  reference: 'SW/7',
+  operation: 'SLIPPERY WEASEL'
 }]
 
 // API

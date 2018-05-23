@@ -36,7 +36,7 @@ class Work extends React.Component {
     this.state = {
       exhibits: [
         {
-          operation: 'TOADSTOOL',
+          operation: 'GREEN TOADSTOOL',
           reference: 'ZZZ/9',
           priority: 'Useful',
           classificationtext: 'Android phones',
@@ -44,7 +44,7 @@ class Work extends React.Component {
           description: 'Test exhibit'
         },
         {
-          operation: 'FLACID PANDA',
+          operation: 'RED PANDA',
           reference: 'ABC/12',
           priority: 'Useful',
           classificationtext: 'Apple tablets',
@@ -52,7 +52,7 @@ class Work extends React.Component {
           description: 'Test exhibit 2'
         },
         {
-          operation: 'RANDY DONKY',
+          operation: 'BLUE DONKY',
           reference: 'MUL/6',
           priority: 'Interesting',
           classificationtext: 'Windows desktops',
@@ -63,9 +63,8 @@ class Work extends React.Component {
     }
   }
 
-  getIcons(icons) {
-    return icons.map((icon, index) => this.getSVGIcon(icon, index))
-  }
+  getIcons = (icons) => icons.map((icon, index) => this.getSVGIcon(icon, index))
+
 
   getSVGIcon(iconText, index) {
     switch (iconText) {
