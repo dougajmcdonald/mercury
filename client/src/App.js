@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Router } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 
-import 'typeface-roboto-condensed'
 import 'typeface-montserrat'
 
 import { size, colour } from './style/theme'
