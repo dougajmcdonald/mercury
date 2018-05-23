@@ -1,0 +1,7 @@
+FROM apache/nifi:latest
+
+COPY nifi-qinetiq-extras-nar-1.0-SNAPSHOT.nar nifi-1.6.0/lib/
+
+COPY Mercury_alpha_workflow_1.xml /opt/nifi/conf/
+
+EXPOSE 8080

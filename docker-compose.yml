@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "80:3000"
+  elastic:
+    build: ./elastic
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=mercury
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  neo4j:
+    build: ./neo4j/
+    environment:
+      - NEO4J_dbms_security_allow__csv__import__from__file__urls=true
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+  nifi:
+    build: ./nifi/
+    ports:
+      - "8081:8080"
