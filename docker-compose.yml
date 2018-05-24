@@ -4,6 +4,9 @@ services:
     build: .
     ports:
       - "80:3000"
+    depends_on:
+      - "nifi"
+      - "elastic"
     # Allows live code editing, unfortunately blocked by firewall
     # volumes:
     #  - .:/usr/src/app/
@@ -19,6 +22,8 @@ services:
       - "9300:9300"
   neo4j:
     build: ./neo4j/
+    depends_on:
+      - "nifi"
     environment:
       - NEO4J_dbms_security_allow__csv__import__from__file__urls=true
     ports:
@@ -26,6 +31,8 @@ services:
       - "7687:7687"
   nifi:
     build: ./nifi/
+    depends_on:
+      - "elastic"
     ports:
       - "8080:8080"
       - "8081:8081"

@@ -74,7 +74,7 @@ class Search extends React.Component {
             {hits ? hits.map((hit, i) => {
               const result = hit._source
               return <tr key={`${result.id}-${i}`}>
-                <td>{result.file}</td>
+                <td><a href={`nifi/${result.file}`}>{result.file}</a></td>
                 <td>{result.case_id}</td>
                 <td>{result.user}</td>
                 <td>{result.run_id}</td>
