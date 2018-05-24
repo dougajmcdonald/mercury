@@ -4,9 +4,7 @@ FROM node:carbon
 WORKDIR /usr/src/app
 
 # Add global dependecnies
-RUN npm i -g npm
-RUN npm i -g nodemon
-RUN npm i -g concurrently
+RUN npm i -g npm nodemon concurrently
 
 # Install app dependencies for server
 COPY package*.json /usr/src/app/

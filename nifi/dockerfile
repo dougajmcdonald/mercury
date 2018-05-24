@@ -1,7 +1,14 @@
 FROM apache/nifi:latest
 
-COPY nifi-qinetiq-extras-nar-1.0-SNAPSHOT.nar nifi-1.6.0/lib/
+COPY nifi-qinetiq-extras-nar-1.0-SNAPSHOT.nar /opt/nifi/nifi-1.6.0/lib/
 
-COPY Mercury_alpha_workflow_1.xml /opt/nifi/conf/
+COPY Mercury_Alpha_Workflow_2.xml /opt/nifi/nifi-1.6.0/conf/templates
+
+COPY --chown=nifi:nifi flow.xml.gz /opt/nifi/nifi-1.6.0/conf/
+
+COPY --chown=nifi:nifi Archive.zip /usr/data/
 
 EXPOSE 8080
+
+#get flow file back out after changes
+#docker cp 560173d66f4f:/opt/nifi/nifi-1.6.0/conf/flow.xml.gz flow.xml.gz

@@ -4,11 +4,16 @@ services:
     build: .
     ports:
       - "80:3000"
+    # Allows live code editing, unfortunately blocked by firewall
+    # volumes:
+    #  - .:/usr/src/app/
   elastic:
     build: ./elastic
     environment:
       - discovery.type=single-node
       - ELASTIC_PASSWORD=mercury
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -22,4 +27,5 @@ services:
   nifi:
     build: ./nifi/
     ports:
-      - "8081:8080"
+      - "8080:8080"
+      - "8081:8081"

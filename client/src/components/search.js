@@ -60,7 +60,6 @@ class Search extends React.Component {
           <thead>
             <tr>
               <th>Filename</th>
-              <th>Filepath</th>
               <th>Case ID</th>
               <th>User</th>
               <th>Run ID</th>
@@ -72,20 +71,20 @@ class Search extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {hits ? hits.map(hit =>
-              <tr key={hit.file.name}>
-                <td>{hit.file.name}</td>
-                <td>{hit.filepath}</td>
-                <td>{hit.case_id}</td>
-                <td>{hit.user}</td>
-                <td>{hit.run_id}</td>
-                <td>{hit.protective_marking}</td>
-                <td>{hit.mime.extension}</td>
-                <td>{hit.mime.type}</td>
-                <td>{hit.file.size}</td>
-                <td>{hit.ingest_time}</td>
+            {hits ? hits.map((hit, i) => {
+              const result = hit._source
+              return <tr key={`${result.id}-${i}`}>
+                <td>{result.file}</td>
+                <td>{result.case_id}</td>
+                <td>{result.user}</td>
+                <td>{result.run_id}</td>
+                <td>{result.protective_marking}</td>
+                <td>{result.file_type}</td>
+                <td>{result.mime_type}</td>
+                <td>{result.file_size}</td>
+                <td>{result.ingest_time}</td>
               </tr>
-            ) : <tr><td>No Results</td></tr>}
+            }) : <tr><td>No Results</td></tr>}
           </tbody>
         </Table>
       </Panel>

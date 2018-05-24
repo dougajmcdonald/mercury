@@ -91,7 +91,7 @@ class TaskForm extends React.Component {
         <Input placeholder="Case Id" value={task ? task.reference : ''}/>
 
         <Label>File path</Label>
-        <Input placeholder="File path" value={task ? task.filePath : ''}/>
+        <Input placeholder="File path" value={task ? task.path : ''}/>
 
         <Button type="submit" onClick={() => this.postTask(task)}>Start Job</Button>
 
