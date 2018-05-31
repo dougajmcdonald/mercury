@@ -83,6 +83,17 @@ class App extends Component {
     this.setState({ hits: body.hits })
   }
 
+  get = async (id) => {
+    const response = await fetch(`/api/get/${id}`)
+    const body = await response.json()
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+
+    this.setState({ file: body.file })
+  }
+
   render() {
     return (
       <Router history={history}>
@@ -93,7 +104,9 @@ class App extends Component {
           <BodyGrid>
             <Body
               search={this.search}
+              get={this.search}
               hits={this.state.hits}
+              file={this.state.file}
               task={this.state.task}
               operation={this.state.operation}
               getTask={this.getTask}

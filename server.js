@@ -110,18 +110,9 @@ app.get('/api/search/:searchTerm', (req, res) => {
     log: 'trace'
   })
 
-  console.log('Searching...' + req.params.searchTerm)
-
   client.search({
     index: 'file_metadata',
-    q: `file:${req.params.searchTerm}`,
-    // body: {
-    //   query: {
-    //     match: {
-    //       body: req.params.searchTerm
-    //     }
-    //   }
-    // }
+    q: `file:${req.params.searchTerm}`
   }).then(resp => {
       const hits = resp.hits.hits
       res.send({ hits })
@@ -129,8 +120,10 @@ app.get('/api/search/:searchTerm', (req, res) => {
       console.trace(err.message)
   })
 
-  // res.send({ hits: [
+  // res.send({ hits: {
+  //   _source: [
   //   {
+  //     id: 1,
   //     file: {
   //       name: 'file1.txt',
   //       size: 128
@@ -147,6 +140,7 @@ app.get('/api/search/:searchTerm', (req, res) => {
   //     ingest_time: new Date()
   //   },
   //   {
+  //     id: 2,
   //     file: {
   //       name: 'file2.txt',
   //       size: 256
@@ -163,6 +157,7 @@ app.get('/api/search/:searchTerm', (req, res) => {
   //     ingest_time: new Date()
   //   },
   //   {
+  //     id: 3,
   //     file: {
   //       name: 'file3.txt',
   //       size: 1024
@@ -178,7 +173,7 @@ app.get('/api/search/:searchTerm', (req, res) => {
   //     },
   //     ingest_time: new Date()
   //   }
-  // ]})
+  // ]}})
 
 })
 

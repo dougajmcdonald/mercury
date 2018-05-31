@@ -11,7 +11,11 @@ import Button from './button'
 const SearchGrid = styled.section`
   display: grid;
   grid-column-gap: ${size.grid};
-  grid-template-rows: 40px 60px 40px 1fr;
+  grid-template-rows: 40px 60px 40px 1fr 300px;
+
+  a {
+    color: ${colour.white};
+  }
 `
 
 const SearchField = styled.input`
@@ -24,6 +28,10 @@ const SearchField = styled.input`
   font-size: ${size.fontbase};
   border-radius: 2px;
   margin: ${size.formpadding};
+
+`
+
+const File = styled.pre`
 
 `
 
@@ -42,7 +50,7 @@ class Search extends React.Component {
   }
 
   render() {
-    const { search, hits } = this.props
+    const { search, get, hits, file } = this.props
     return <SearchGrid>
       <TableTitle>
         Search
@@ -73,8 +81,8 @@ class Search extends React.Component {
           <tbody>
             {hits ? hits.map((hit, i) => {
               const result = hit._source
-              return <tr key={`${result.id}-${i}`}>
-                <td><a href={`nifi/${result.file}`}>{result.file}</a></td>
+              return <tr key={`${result.id}-${i}`} onClick={() => get(result.id)}>
+                <td>{result.file}</td>
                 <td>{result.case_id}</td>
                 <td>{result.user}</td>
                 <td>{result.run_id}</td>
@@ -88,6 +96,9 @@ class Search extends React.Component {
           </tbody>
         </Table>
       </Panel>
+      <File>
+        {file}
+      </File>
     </SearchGrid>
   }
 }
