@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 app.use(bodyParser.json())
+app.use(express.static('client/build'))
 const port = process.env.PORT || 5000
 
 // Data's

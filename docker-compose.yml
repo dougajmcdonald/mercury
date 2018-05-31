@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-      - "80:3000"
+      - "80:5000"
     depends_on:
       - "nifi"
       - "elastic"
@@ -26,6 +26,7 @@ services:
       - "nifi"
     environment:
       - NEO4J_dbms_security_allow__csv__import__from__file__urls=true
+      - NEO4J_dbms_security_auth__enabled=false
     ports:
       - "7474:7474"
       - "7687:7687"

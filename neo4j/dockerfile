@@ -1,5 +1,7 @@
 FROM neo4j:3.3.5
 
+COPY --chown=neo4j:neo4j phone_calls.csv /var/lib/neo4j/import
+
 EXPOSE 7474:7474
 
 EXPOSE 7687:7687

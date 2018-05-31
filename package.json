@@ -2,7 +2,7 @@
   "name": "mercury",
   "version": "0.1.0",
   "scripts": {
-    "client": "cd client && yarn start",
+    "client": "cd client && yarn build",
     "server": "nodemon server.js",
     "nifi": "nodemon fakenifiserver.js",
     "startwithfakenifi": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"npm run nifi\"",

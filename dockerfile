@@ -4,7 +4,7 @@ FROM node:alpine
 WORKDIR /usr/src/app
 
 # Add global dependecnies
-RUN npm i -g npm nodemon concurrently
+RUN npm i -g npm nodemon concurrently yarn
 
 # Install app dependencies for server
 COPY package*.json /usr/src/app/
@@ -23,5 +23,5 @@ COPY . /usr/src/app/
 
 WORKDIR /usr/src/app/
 
-EXPOSE 3000
+EXPOSE 5000
 CMD [ "npm", "start" ]

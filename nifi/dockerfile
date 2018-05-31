@@ -8,6 +8,8 @@ COPY --chown=nifi:nifi flow.xml.gz /opt/nifi/nifi-1.6.0/conf/
 
 COPY --chown=nifi:nifi Archive.zip /usr/data/
 
+COPY --chown=nifi:nifi ingest-csv.sh /usr/scripts/
+
 EXPOSE 8080
 
 #get flow file back out after changes
