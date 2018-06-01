@@ -98,6 +98,50 @@ class App extends Component {
     // this.setState({ file: body.file })
   }
 
+  getGraph = async () => {
+
+    const payload = JSON.stringify({"statements": [ {
+      "statement": "MATCH (n) OPTIONAL MATCH (n)-[r]-() RETURN n, r",
+      "resultDataContents":["row", "graph"]
+    }]})
+
+    const response = await fetch(`http://localhost:7474/db/data/transaction/commit`,
+    {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: payload
+    })
+
+    const body = await response.json()
+
+    console.log(body)
+
+    // var nodesDict = body.results.map(result =>
+    //   result.data.reduce(function(dict, node) {
+    //     dict[node.Id] = node
+    //     return dict
+    // }, {}))
+
+    //console.log(nodesDict)
+
+    // const graphData = body.results.map(result => (
+    //   result.data.map(node => ({
+    //     id: node.graph.meta[0].id,
+    //     phone_number: node.graph.row[0].phone_number
+    //   }))))
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+
+    this.setState({ graphData: body })
+
+
+    //console.log(graphData)
+  }
+
   render() {
     return (
       <Router history={history}>
@@ -112,8 +156,10 @@ class App extends Component {
               hits={this.state.hits}
               file={this.state.file}
               task={this.state.task}
+              graphData={this.state.graphData}
               operation={this.state.operation}
               getTask={this.getTask}
+              getGraph={this.getGraph}
               getOperation={this.getOperation}/>
           </BodyGrid>
         </AppGrid>

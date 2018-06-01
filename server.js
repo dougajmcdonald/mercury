@@ -124,12 +124,6 @@ app.get('/api/get/:id', (req, res) => {
 
   res.download(filepath);
 
-  //files//usr/data/1-1/Archive.zip/._phone_calls.csv
-
-  // const path2 = path.join('files', id)
-
-  // console.log(path2)
-
 })
 
 app.get('/api/search/:searchTerm', (req, res) => {
