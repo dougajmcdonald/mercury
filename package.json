@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "scripts": {
     "client": "cd client && yarn build",
+    "client-dev": "cd client && npm start",
     "server": "nodemon server.js",
     "nifi": "nodemon fakenifiserver.js",
     "startwithfakenifi": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"npm run nifi\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client-dev\""
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "elasticsearch": "^15.0.0",
     "express": "^4.16.2",
+    "neo4jd3": "0.0.5",
     "node-fetch": "^2.1.2",
     "typeface-montserrat": "0.0.54"
   },

@@ -81,7 +81,7 @@ class Search extends React.Component {
           <tbody>
             {hits ? hits.map((hit, i) => {
               const result = hit._source
-              return <tr key={`${result.id}-${i}`} onClick={() => get(result.id)}>
+              return <tr key={`${hit._id}-${i}`} onClick={() => get(encodeURIComponent(result.file))}>
                 <td>{result.file}</td>
                 <td>{result.case_id}</td>
                 <td>{result.user}</td>

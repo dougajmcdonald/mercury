@@ -8,6 +8,7 @@ import Grid from '../img/md-grid.svg'
 import Filing from '../img/md-filing.svg'
 import Cube from '../img/md-cube.svg'
 import Search from '../img/md-search.svg'
+import Graph from '../img/md-share.svg'
 
 const SidebarGrid = styled.section`
   background-color: ${colour.backgrounddark};
@@ -79,6 +80,10 @@ const Sidebar = () =>
       <NavItem to="/search">
         <Icon src={Search} />
         Search
+      </NavItem>
+      <NavItem to="/graph">
+        <Icon src={Graph} />
+        Graph
       </NavItem>
     </Nav>
   </SidebarGrid>
