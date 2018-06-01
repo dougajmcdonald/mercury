@@ -1,4 +1,6 @@
 version: '3'
+volumes:
+  file-storage:
 services:
   web:
     build: .
@@ -7,6 +9,8 @@ services:
     depends_on:
       - "nifi"
       - "elastic"
+    volumes:
+     - file-storage:/usr/ingested-files/
     # Allows live code editing, unfortunately blocked by firewall
     # volumes:
     #  - .:/usr/src/app/
@@ -34,6 +38,8 @@ services:
     build: ./nifi/
     depends_on:
       - "elastic"
+    volumes:
+     - file-storage:/usr/data
     ports:
       - "8080:8080"
       - "8081:8081"

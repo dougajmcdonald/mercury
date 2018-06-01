@@ -2,11 +2,17 @@ const express = require('express')
 const fetch = require('node-fetch')
 const elastic = require('elasticsearch')
 const bodyParser = require('body-parser')
+const path = require('path')
 
 const app = express()
 app.use(bodyParser.json())
 app.use(express.static('client/build'))
 const port = process.env.PORT || 5000
+
+const elasticsearch = new elastic.Client({
+  host: 'elastic:9200',
+  log: 'trace'
+})
 
 // Data's
 const tasks = [{
@@ -103,14 +109,32 @@ app.post('/api/task/', (req, res) => {
 
 })
 
+app.get('/api/get/:id', (req, res) => {
+
+  const id = req.params.id
+
+  // 9 = /usr/data/
+  const filename = id.substring(9, id.length)
+
+  console.log(filename)
+
+  const filepath = path.join('/usr/ingested-files', filename)
+
+  console.log(filepath)
+
+  res.download(filepath);
+
+  //files//usr/data/1-1/Archive.zip/._phone_calls.csv
+
+  // const path2 = path.join('files', id)
+
+  // console.log(path2)
+
+})
+
 app.get('/api/search/:searchTerm', (req, res) => {
 
-  const client = new elastic.Client({
-    host: 'elastic:9200',
-    log: 'trace'
-  })
-
-  client.search({
+  elasticsearch.search({
     index: 'file_metadata',
     q: `file:${req.params.searchTerm}`
   }).then(resp => {

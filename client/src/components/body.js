@@ -33,7 +33,7 @@ const ExibitGrid = styled.section`
 
 const Body = (props) => {
 
-  const { task, operation, hits, getTask, getOperation, search, get, file } = props
+  const { task, get, operation, hits, getTask, getOperation, search, file } = props
 
   return <BodyGrid>
     <Route exact path="/" render={props => (

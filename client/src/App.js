@@ -85,13 +85,17 @@ class App extends Component {
 
   get = async (id) => {
     const response = await fetch(`/api/get/${id}`)
-    const body = await response.json()
 
-    if (response.status !== 200) {
-      throw Error(body.message)
-    }
+    console.log(response)
 
-    this.setState({ file: body.file })
+    return response
+    // const body = await response.json()
+
+    // if (response.status !== 200) {
+    //   throw Error(body.message)
+    // }
+
+    // this.setState({ file: body.file })
   }
 
   render() {
@@ -104,7 +108,7 @@ class App extends Component {
           <BodyGrid>
             <Body
               search={this.search}
-              get={this.search}
+              get={this.get}
               hits={this.state.hits}
               file={this.state.file}
               task={this.state.task}
